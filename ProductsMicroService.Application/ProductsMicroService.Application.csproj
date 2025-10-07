@@ -20,5 +20,10 @@
       <ProjectReference Include="..\ProductsMicroService.Domain\ProductsMicroService.Domain.csproj" />
       <ProjectReference Include="..\ProductsMicroService.Infrastructure\ProductsMicroService.Infrastructure.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="BrandFeature\Queries\" />
+      <Folder Include="Queries\" />
+    </ItemGroup>
     
 </Project>
