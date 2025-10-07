@@ -5,7 +5,6 @@
 [![Pattern](https://img.shields.io/badge/Pattern-CQRS%20%26%20MediatR-brightgreen)](#)
 [![Database](https://img.shields.io/badge/Database-EF%20Core%20%7C%20SQL%20Server-lightgrey)](#)
 [![Docker](https://img.shields.io/badge/Docker-ready-blue?logo=docker)](https://www.docker.com/)
-[![Build](https://img.shields.io/badge/Build-Passing-success)](#)
 
 ---
 
