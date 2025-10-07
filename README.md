@@ -13,7 +13,7 @@
 > It manages all product-related data including brands, categories, subcategories, colors, sizes, variants, wishlists, and feedback.  
 >  
 > Built using **.NET 9**, **Entity Framework Core**, **CQRS**, and **MediatR**, with **Domain-Driven Design (DDD)** and **Clean Architecture** for maximum scalability and maintainability.
-
+> The database Used is MySql.
 ---
 
 ## ⚙️ Key Features
