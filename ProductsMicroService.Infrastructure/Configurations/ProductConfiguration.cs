@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProductsMicroService.Domain.Entities;
 
@@ -22,6 +23,13 @@ public class ProductConfiguration: BaseEntityConfiguration<Product>
         
         builder.Property(temp => temp.Price).HasColumnName("ProductPrice").HasPrecision(18, 2);
         
+        builder
+            .Property(p => p.ProductImages)
+            .HasConversion(
+                v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
+                v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions?)null) ?? new List<string>()
+            )
+            .HasColumnType("json");
         
         builder
             .HasOne(c => c.Category)
