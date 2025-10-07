@@ -9,7 +9,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
-        const string connectionString = "Server=localhost;Port=3306;Database=euphoriaproducts;User ID=root;Password=Admin1234";
+        const string connectionString = "Server=localhost;Port=3306;Database=EuphoriaProducts;User ID=root;Password=Admin1234";
         
         optionsBuilder.UseMySQL(connectionString);
 

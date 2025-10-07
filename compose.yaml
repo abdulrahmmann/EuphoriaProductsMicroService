@@ -1,0 +1,38 @@
+﻿services:
+  productsmicroservice.api:
+    image: abdulra7manmustafa/euphoria-products-microservices
+    build:
+      context: .
+      dockerfile: ProductsMicroService.Api/Dockerfile
+    ports:
+      - "8080:8081"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: EuphoriaProducts
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Admin1234
+    depends_on:
+      - mysql
+    networks:
+      - euphoria_network
+
+  mysql:
+    image: mysql:9
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin1234
+      MYSQL_DATABASE: EuphoriaProducts
+    ports:
+      - "3306:3306"
+    networks:
+      - euphoria_network
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
+
+networks:
+  euphoria_network:
+    driver: bridge
