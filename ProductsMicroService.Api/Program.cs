@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using ProductsMicroService.Application;
+using ProductsMicroService.Endpoints;
 using ProductsMicroService.Infrastructure;
 using ProductsMicroService.Middlewares;
 using Scalar.AspNetCore;
@@ -56,5 +57,7 @@ app.UseAuthorization();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapBrandEndpoints(); 
 
 app.Run();

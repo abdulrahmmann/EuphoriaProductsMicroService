@@ -10,7 +10,7 @@ public static class ModuleDependencyInjection
     public static IServiceCollection AddInfrastructureDependency(this IServiceCollection services, IConfiguration configuration)
     {
         // Register Db Context
-        var connectionStringTemplate = configuration.GetConnectionString("DefaultConnection")!;
+        var connectionStringTemplate = configuration.GetConnectionString("MySqlConnection")!;
 
         var connectionString = connectionStringTemplate
             .Replace("$MYSQL_HOST", Environment.GetEnvironmentVariable("MYSQL_HOST") ?? "localhost")
