@@ -58,7 +58,7 @@ public class CreateBrandCommandHandler: IQueryHandler<CreateBrandCommand, BaseRe
             await _dbContext.AddAsync(newBrand, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
             
-            return BaseResponse<Unit>.Success($"Brand with name: {brandMapped.Name}  has been successfully created");
+            return BaseResponse<Unit>.Created($"Brand with name: {brandMapped.Name}  has been successfully created");
         }
         catch (Exception e)
         {

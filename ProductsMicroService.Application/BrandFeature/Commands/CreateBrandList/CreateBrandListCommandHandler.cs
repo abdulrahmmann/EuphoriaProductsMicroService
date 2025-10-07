@@ -72,7 +72,7 @@ public class CreateBrandListCommandHandler: ICommandHandler<CreateBrandListComma
 
             // 4️⃣ Success response
             var createdNames = string.Join(", ", newBrands.Select(b => b.Name));
-            return BaseResponse<Unit>.Success($"Brands created successfully: {createdNames}");
+            return BaseResponse<Unit>.Created($"Brands created successfully: {createdNames}");
         }
         catch (Exception e)
         {
