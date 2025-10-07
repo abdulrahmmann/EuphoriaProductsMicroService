@@ -26,3 +26,23 @@ Infrastructure → EF Core repositories, database context, and configurations.
 
 Dockerized: Includes Dockerfile and Compose setup for isolated container deployment.
 
+Tech Stack:
+Backend:	.NET 9, ASP.NET Core Web API
+Architecture:	Clean Architecture + CQRS + DDD
+Mediator:	MediatR
+Persistence:	Entity Framework Core 9 + SQL Server
+Validation:	FluentValidation
+Mapping:	Mapster
+Containerization:	Docker & Docker Compose
+
+Core Domain Entities:
+Product: Represents the main product with base info, images, brand, category, and price.
+ProductVariant:	Specific variant of a product (Color + Size + Stock + PriceOverride).
+Brand:	Product manufacturer or brand.
+MainCategory:	Top-level category (Men / Women / Kids).
+Category:	Middle-level classification (Clothing / Shoes / Accessories).
+SubCategory: Detailed classification (T-Shirts / Jackets / Sneakers).
+Color: Represents product color (Name, HexCode).
+Size:	Represents product size (S, M, L, XL...).
+Feedback:	Product rating and review by user.
+Wishlist:	User’s saved products.
