@@ -15,6 +15,9 @@ public class Product : Entity<int>
 
     public int SubCategoryId { get; private set; }
     public SubCategory SubCategory { get; private set; } = null!;
+    
+    public int MainCategoryId { get; private set; }
+    public MainCategory MainCategory { get; private set; } = null!;
 
     public int BrandId { get; private set; }
     public Brand Brand { get; private set; } = null!;
