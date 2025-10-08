@@ -25,7 +25,7 @@ public class Product : Entity<int>
 
     private Product() { }
 
-    private Product(string name, string description, decimal price, int totalStock, int categoryId, int subCategoryId, int brandId)
+    public Product(string name, string description, decimal price, int totalStock, ICollection<string> productImages, int categoryId, int subCategoryId, int brandId)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
         ArgumentException.ThrowIfNullOrEmpty(description);
@@ -34,6 +34,7 @@ public class Product : Entity<int>
         Description = description;
         Price = price;
         TotalStock = totalStock;
+        ProductImages = productImages;
         CategoryId = categoryId;
         SubCategoryId = subCategoryId;
         BrandId = brandId;
@@ -41,8 +42,8 @@ public class Product : Entity<int>
         MarkCreated();
     }
 
-    public static Product Create(string name, string description, decimal price, int totalStock, int categoryId, int subCategoryId, int brandId)
-        => new(name, description, price, totalStock, categoryId, subCategoryId, brandId);
+    public static Product Create(string name, string description, decimal price, int totalStock, ICollection<string> productImages, int categoryId, int subCategoryId, int brandId)
+        => new(name, description, price, totalStock, productImages, categoryId, subCategoryId, brandId);
 
     public void UpdateProduct(string? name, string? description, decimal? price, int? totalStock, int? categoryId, int? brandId, string? modifiedBy = null)
     {
