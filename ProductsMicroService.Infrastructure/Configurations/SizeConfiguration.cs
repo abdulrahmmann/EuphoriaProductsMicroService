@@ -17,5 +17,7 @@ public class SizeConfiguration: BaseEntityConfiguration<Size>
         builder.HasIndex(temp => temp.Name);
         
         builder.Property(temp => temp.Name).IsRequired().HasColumnName("SizeName").HasMaxLength(60);
+        
+        builder.Property(temp => temp.SizeType).IsRequired().HasColumnName("SizeType");
     }
 }

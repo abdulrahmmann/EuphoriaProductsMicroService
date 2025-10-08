@@ -8,6 +8,8 @@ namespace ProductsMicroService.Domain.Entities;
 public class Size : Entity<int>
 {
     public string Name { get; private set; } = null!;
+
+    public string SizeType { get; private set; } = null!;
     public ICollection<ProductVariant> Variants { get; private set; } = new List<ProductVariant>();
 
     private Size() { }
