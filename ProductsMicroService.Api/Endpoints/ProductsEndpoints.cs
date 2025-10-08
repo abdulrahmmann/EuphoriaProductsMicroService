@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ProductsMicroService.Application.ProductsFeature.Commands.CreateProduct;
 using ProductsMicroService.Application.ProductsFeature.Commands.CreateProductList;
+using ProductsMicroService.Application.ProductsFeature.Commands.DeleteProduct;
+using ProductsMicroService.Application.ProductsFeature.Commands.RestoreProduct;
 using ProductsMicroService.Application.ProductsFeature.Commands.UpdateProduct;
 using ProductsMicroService.Application.ProductsFeature.DTOs;
 using ProductsMicroService.Application.ProductsFeature.Queries.GetProducts;
@@ -51,6 +53,32 @@ public static class ProductsEndpoints
             .WithSummary("Update Single Product.")
             .WithDescription("Update a single product.")
             .WithBadge("UpdateProductBadge");
+        #endregion
+
+        #region Restore Product Endpoint
+        endpoints.MapPut("/restore/{productId}", async (int productId, IMediator mediator) =>
+            {
+                var response = await mediator.Send(new RestoreProductCommand(productId));
+                return response.ToResult();
+            })
+            .WithName("RestoreProduct")
+            .WithSummary("Restore a soft-deleted product.")
+            .WithDescription("Restores a previously soft-deleted product by ID.")
+            .WithBadge("RestoreProductBadge");
+        #endregion
+
+
+
+        #region Delete Product Endpoint
+        endpoints.MapDelete("/delete/{productId}", async (int productId, IMediator mediator) =>
+            {
+                var response = await mediator.Send(new DeleteProductCommand(productId));
+                return response.ToResult();
+            })
+            .WithName("DeleteProduct")
+            .WithSummary("Delete Single Product.")
+            .WithDescription("Delete a single product.")
+            .WithBadge("DeleteProductBadge");
         #endregion
         
         #region Get All Products Endpoint
