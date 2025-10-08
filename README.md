@@ -12,7 +12,7 @@
 >  
 > It manages all product-related data including brands, categories, subcategories, colors, sizes, variants, wishlists, and feedback.  
 >  
-> Built using **.NET 9**, **Entity Framework Core**, **CQRS**, and **MediatR**, with **Domain-Driven Design (DDD)** and **Clean Architecture** for maximum scalability and maintainability.
+> Built using **.NET 9**, ** Minimal APIs **, **Entity Framework Core**, **CQRS**, and **MediatR**, with **Domain-Driven Design (DDD)** and **Clean Architecture** for maximum scalability and maintainability.
 > The database Used is MySql.
 ---
 
@@ -21,7 +21,6 @@
 - 🧱 **Product Management:** CRUD operations for all product data (name, price, description, images, brand, etc.)
 - 🎨 **Product Variants:** Supports multiple combinations of colors, sizes, and price overrides.
 - 🧩 **Category Hierarchy:**  
-  - `MainCategory` → Men, Women, Kids  
   - `Category` → Clothing, Shoes, Accessories  
   - `SubCategory` → T-Shirts, Sneakers, Jackets
 - 💬 **Feedback & Wishlist:** Manage product reviews and user wishlists.
@@ -41,12 +40,12 @@
 | Layer | Technologies |
 |-------|---------------|
 | **Backend** | .NET 9, ASP.NET Core Web API |
-| **Architecture** | Clean Architecture + DDD + CQRS |
+| **Architecture** | Clean Architecture + DDD + CQRS + Vertical Slice |
 | **Mediator** | MediatR |
 | **ORM** | Entity Framework Core 9 |
 | **Validation** | FluentValidation |
-| **Mapping** | Mapster |
-| **Database** | SQL Server |
+| **Mapping** | Mapster + Manual |
+| **Database** | MySql |
 | **Deployment** | Docker & Docker Compose |
 
 ---
@@ -58,7 +57,6 @@
 | **Product** | Main entity holding product info, price, images, and category links. |
 | **ProductVariant** | Specific product variant (color + size + stock + optional price override). |
 | **Brand** | Product manufacturer or brand. |
-| **MainCategory** | Top-level classification (Men / Women / Kids). |
 | **Category** | Subsection of main category (Clothing, Shoes, etc.). |
 | **SubCategory** | Detailed section (e.g., T-Shirts, Sneakers). |
 | **Color** | Defines color with name and hex value. |
