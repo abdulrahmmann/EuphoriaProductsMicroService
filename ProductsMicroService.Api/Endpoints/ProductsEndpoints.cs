@@ -1,6 +1,9 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ProductsMicroService.Application.ProductsFeature.Commands.CreateProduct;
+using ProductsMicroService.Application.ProductsFeature.Commands.CreateProductList;
+using ProductsMicroService.Application.ProductsFeature.Commands.UpdateProduct;
+using ProductsMicroService.Application.ProductsFeature.DTOs;
 using ProductsMicroService.Application.ProductsFeature.Queries.GetProducts;
 using ProductsMicroService.Helpers;
 using Scalar.AspNetCore;
@@ -23,6 +26,31 @@ public static class ProductsEndpoints
         .WithSummary("Create Single Product.")
         .WithDescription("Creates a single product.")
         .WithBadge("CreateProductBadge");
+        #endregion
+
+        #region Create Multiple Products Endpoint
+        endpoints.MapPost("/create-list", async ([FromBody] CreateProductListCommand command, IMediator mediator) =>
+            {
+                var response = await mediator.Send(command);
+                return response.ToResult();
+            })
+            .WithName("CreateProductList")
+            .WithSummary("Create List Product.")
+            .WithDescription("Creates a List product.")
+            .WithBadge("CreateProductListBadge");
+        #endregion
+
+        #region Update Product Endpoint
+        endpoints.MapPut("/update/{productId}", async (int productId, [FromBody] UpdateProductDto dto, IMediator mediator) =>
+            {
+                var command = new UpdateProductCommand(productId, dto);
+                var response = await mediator.Send(command);
+                return response.ToResult();
+            })
+            .WithName("UpdateProduct")
+            .WithSummary("Update Single Product.")
+            .WithDescription("Update a single product.")
+            .WithBadge("UpdateProductBadge");
         #endregion
         
         #region Get All Products Endpoint
