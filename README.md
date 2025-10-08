@@ -41,12 +41,12 @@
 | Layer | Technologies |
 |-------|---------------|
 | **Backend** | .NET 9, ASP.NET Core Web API |
-| **Architecture** | Clean Architecture + DDD + CQRS |
+| **Architecture** | Clean Architecture + DDD + CQRS + Vertical Slice |
 | **Mediator** | MediatR |
 | **ORM** | Entity Framework Core 9 |
 | **Validation** | FluentValidation |
-| **Mapping** | Mapster |
-| **Database** | SQL Server |
+| **Mapping** | Mapster + Manual |
+| **Database** | MySql |
 | **Deployment** | Docker & Docker Compose |
 
 ---
@@ -58,7 +58,6 @@
 | **Product** | Main entity holding product info, price, images, and category links. |
 | **ProductVariant** | Specific product variant (color + size + stock + optional price override). |
 | **Brand** | Product manufacturer or brand. |
-| **MainCategory** | Top-level classification (Men / Women / Kids). |
 | **Category** | Subsection of main category (Clothing, Shoes, etc.). |
 | **SubCategory** | Detailed section (e.g., T-Shirts, Sneakers). |
 | **Color** | Defines color with name and hex value. |
