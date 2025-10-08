@@ -9,7 +9,7 @@ public class Product : Entity<int>
     public decimal Price { get; private set; }
     public int TotalStock { get; private set; }
     public ICollection<string> ProductImages { get; private set; } = new List<string>();
-
+    
     public int CategoryId { get; private set; }
     public Category Category { get; private set; } = null!;
 

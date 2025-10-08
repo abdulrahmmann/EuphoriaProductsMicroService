@@ -21,5 +21,9 @@
       <ProjectReference Include="..\ProductsMicroService.Domain\ProductsMicroService.Domain.csproj" />
       <ProjectReference Include="..\ProductsMicroService.Infrastructure\ProductsMicroService.Infrastructure.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ProductsFeature\Queries\" />
+    </ItemGroup>
     
 </Project>

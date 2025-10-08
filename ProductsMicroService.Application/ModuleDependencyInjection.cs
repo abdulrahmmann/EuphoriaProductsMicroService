@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ProductsMicroService.Application.BrandFeature.Validators;
 using ProductsMicroService.Application.CategoriesFeature.Validators;
 using ProductsMicroService.Application.ColorsFeature.Validators;
-using ProductsMicroService.Application.Mapping;
+using ProductsMicroService.Application.ProductsFeature.Validators;
 
 namespace ProductsMicroService.Application;
 
@@ -30,6 +30,9 @@ public static class ModuleDependencyInjection
         services.AddValidatorsFromAssemblyContaining<CreateSubCategoryValidator>();
         
         services.AddValidatorsFromAssemblyContaining<CreateColorValidator>();
+        
+        services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateProductValidator>();
         
         return services;
     }
