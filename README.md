@@ -21,7 +21,6 @@
 - 🧱 **Product Management:** CRUD operations for all product data (name, price, description, images, brand, etc.)
 - 🎨 **Product Variants:** Supports multiple combinations of colors, sizes, and price overrides.
 - 🧩 **Category Hierarchy:**  
-  - `MainCategory` → Men, Women, Kids  
   - `Category` → Clothing, Shoes, Accessories  
   - `SubCategory` → T-Shirts, Sneakers, Jackets
 - 💬 **Feedback & Wishlist:** Manage product reviews and user wishlists.
