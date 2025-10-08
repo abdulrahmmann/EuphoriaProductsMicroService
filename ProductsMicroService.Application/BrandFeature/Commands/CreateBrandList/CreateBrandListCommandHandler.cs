@@ -34,7 +34,7 @@ public class CreateBrandListCommandHandler: ICommandHandler<CreateBrandListComma
             if (request.Brands == null || !request.Brands.Any())
                 return BaseResponse<Unit>.ValidationError("No brands provided.");
 
-            // 1️⃣ Validate each DTO
+            // Validate each DTO
             foreach (var dto in request.Brands)
             {
                 var result = await _validator.ValidateAsync(dto, cancellationToken);
@@ -45,7 +45,7 @@ public class CreateBrandListCommandHandler: ICommandHandler<CreateBrandListComma
                 }
             }
 
-            // 2️⃣ Filter out duplicates (either in DB or request itself)
+            // Filter out duplicates (either in DB or request itself)
             var existingNames = await _dbContext.Brands
                 .Where(b => request.Brands.Select(x => x.Name).Contains(b.Name))
                 .Select(b => b.Name)
@@ -62,7 +62,7 @@ public class CreateBrandListCommandHandler: ICommandHandler<CreateBrandListComma
                 return BaseResponse<Unit>.Conflict($"The following brands already exist: {dupNames}");
             }
 
-            // 3️⃣ Map + create entities
+            // Map + create entities
             var newBrands = request.Brands
                 .Select(dto => Brand.CreateBrand(dto.Name))
                 .ToList();

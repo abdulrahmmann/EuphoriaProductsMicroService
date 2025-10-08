@@ -10,29 +10,25 @@ public class Category: Entity<int>
     public string Name { get; private set; } = null!; // Men, Women, Kids
     public string? Description { get; private set; } = null!;
     
-    public int MainCategoryId { get; private set; } 
-    public MainCategory MainCategory { get; private set; } = null!;
-    
     public ICollection<Product> Products { get; private set; } = new List<Product>();
     
     public ICollection<SubCategory> SubCategories { get; private set; } = new List<SubCategory>();
 
     private Category() {}
     
-    private Category(string name, string? description, int mainCategoryId)
+    private Category(string name, string? description)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
         Name = name;
         Description = description;
-        MainCategoryId = mainCategoryId;
         
         MarkCreated();
     }
     
     #region Create Category
     /// <summary> Factory method to create Category. </summary>
-    public static Category CreateCategory(string name, string? description, int mainCategoryId) 
-        => new(name, description, mainCategoryId);
+    public static Category CreateCategory(string name, string? description) 
+        => new(name, description);
     #endregion
     
     #region Update Category

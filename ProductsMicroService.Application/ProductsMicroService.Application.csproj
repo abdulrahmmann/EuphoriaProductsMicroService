@@ -23,7 +23,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Queries\" />
+      <Folder Include="ColorsFeature\Commands\" />
+      <Folder Include="ColorsFeature\DTOs\" />
+      <Folder Include="ColorsFeature\Queries\" />
+      <Folder Include="ColorsFeature\Validators\" />
     </ItemGroup>
     
 </Project>

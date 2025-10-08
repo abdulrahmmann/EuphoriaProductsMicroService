@@ -59,5 +59,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapBrandEndpoints(); 
+app.MapCategoryEndpoints(); 
+app.MapSubCategoryEndpoints(); 
 
 app.Run();

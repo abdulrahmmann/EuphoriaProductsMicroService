@@ -44,12 +44,5 @@ public class ProductConfiguration: BaseEntityConfiguration<Product>
             .HasForeignKey(c => c.SubCategoryId)
             .OnDelete(DeleteBehavior.Restrict)
             .HasConstraintName("FK_Product_SubCategory_Id");
-        
-        builder
-            .HasOne(c => c.MainCategory)
-            .WithMany(p => p.Products)
-            .HasForeignKey(c => c.MainCategoryId)
-            .OnDelete(DeleteBehavior.Restrict)
-            .HasConstraintName("FK_Product_MainCategory_Id");
     }
 }

@@ -4,6 +4,7 @@ using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ProductsMicroService.Application.BrandFeature.Validators;
+using ProductsMicroService.Application.CategoriesFeature.Validators;
 using ProductsMicroService.Application.Mapping;
 
 namespace ProductsMicroService.Application;
@@ -15,7 +16,7 @@ public static class ModuleDependencyInjection
         // Register Mapster
         services.AddMapster();
         var config = TypeAdapterConfig.GlobalSettings;
-        config.Scan(typeof(BrandMapping).Assembly);
+        config.Scan(Assembly.GetExecutingAssembly());
         
         // Register Mediatr
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
@@ -23,6 +24,9 @@ public static class ModuleDependencyInjection
         // Register Fluent Validation
         services.AddValidatorsFromAssemblyContaining<CreateBrandValidator>();
         services.AddValidatorsFromAssemblyContaining<UpdateBrandValidator>();
+        
+        services.AddValidatorsFromAssemblyContaining<CreateCategoryValidator>();
+        services.AddValidatorsFromAssemblyContaining<CreateSubCategoryValidator>();
         
         return services;
     }

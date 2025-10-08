@@ -9,8 +9,6 @@ public class ApplicationDbContext: DbContext
     
     public DbSet<SubCategory> SubCategories { get; set; }
     
-    public DbSet<MainCategory> MainCategories { get; set; }
-    
     public DbSet<Size> Sizes { get; set; }
     
     public DbSet<Color> Colors { get; set; }
@@ -36,7 +34,6 @@ public class ApplicationDbContext: DbContext
         
         builder.Entity<Category>().HasQueryFilter(u => !u.IsDeleted);
         builder.Entity<SubCategory>().HasQueryFilter(u => !u.IsDeleted);
-        builder.Entity<MainCategory>().HasQueryFilter(u => !u.IsDeleted);
         builder.Entity<Size>().HasQueryFilter(u => !u.IsDeleted);
         builder.Entity<Color>().HasQueryFilter(u => !u.IsDeleted);
         builder.Entity<Brand>().HasQueryFilter(u => !u.IsDeleted);
