@@ -16,7 +16,7 @@ public static class BrandsEndpoints
             .WithTags("Brands")
             .WithOpenApi();
 
-        // Create single brand
+        // ✅ Create single brand
         endpoints.MapPost("/create", async ([FromBody] CreateBrandCommand command, IMediator mediator) =>
             {
                 var response = await mediator.Send(command);
@@ -26,7 +26,7 @@ public static class BrandsEndpoints
             .WithSummary("Create a single brand.")
             .WithDescription("Validates input and creates a new brand record.");
 
-        // Create multiple brands
+        // ✅ Create multiple brands
         endpoints.MapPost("/create-list", async ([FromBody] CreateBrandListCommand command, IMediator mediator) =>
             {
                 var response = await mediator.Send(command);
@@ -36,7 +36,7 @@ public static class BrandsEndpoints
             .WithSummary("Create multiple brands.")
             .WithDescription("Creates a batch of brands in one request.");
 
-        // Get brands — query binding still automatic
+        // ✅ Get brands — query binding still automatic
         endpoints.MapGet("/list", async ([AsParameters] GetBrandsQuery query, IMediator mediator) =>
             {
                 var response = await mediator.Send(query);
@@ -46,7 +46,7 @@ public static class BrandsEndpoints
             .WithSummary("Get all brands.")
             .WithDescription("Retrieves all brand records.");
         
-        // Get brands by id
+        // ✅ Get brands by id
         endpoints.MapGet("/{id:int}", async (int id, IMediator mediator) =>
             {
                 var query = new GetBrandByIdQuery(id);
