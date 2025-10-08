@@ -61,5 +61,6 @@ app.MapControllers();
 app.MapBrandEndpoints(); 
 app.MapCategoryEndpoints(); 
 app.MapSubCategoryEndpoints(); 
+app.MapColorEndpoints(); 
 
 app.Run();

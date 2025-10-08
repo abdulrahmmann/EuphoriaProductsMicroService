@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using MapsterMapper;
+﻿using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using ProductsMicroService.Application.Bases;
 using ProductsMicroService.Application.BrandFeature.DTOs;
