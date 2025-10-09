@@ -22,46 +22,50 @@ public static class ProductsEndpoints
     public static void MapProductsEndpoints(this IEndpointRouteBuilder builder)
     {
         var endpoints = builder.MapGroup("/api/products").WithTags("Products").WithOpenApi();
+        
+        // ======================== 🟢 CREATE 🟢 ========================
 
-        #region Create Single Product Endpoint
+        #region Create Single Product
         endpoints.MapPost("/create", async ([FromBody] CreateProductCommand command, IMediator mediator) =>
-        {
-            var response = await mediator.Send(command);
-            return response.ToResult();
-        })
-        .WithName("CreateProduct")
-        .WithSummary("Create Single Product.")
-        .WithDescription("Creates a single product.")
-        .WithBadge("CreateProductBadge");
+            {
+                var response = await mediator.Send(command);
+                return response.ToResult();
+            })
+            .WithName("CreateProduct")
+            .WithSummary("Create a single product.")
+            .WithDescription("Creates a new product with its associated brand, category, and subcategory.")
+            .WithBadge("CreateProductBadge");
         #endregion
 
-        #region Create Multiple Products Endpoint
+        #region Create Multiple Products
         endpoints.MapPost("/create-list", async ([FromBody] CreateProductListCommand command, IMediator mediator) =>
             {
                 var response = await mediator.Send(command);
                 return response.ToResult();
             })
             .WithName("CreateProductList")
-            .WithSummary("Create List Product.")
-            .WithDescription("Creates a List product.")
+            .WithSummary("Create multiple products.")
+            .WithDescription("Creates a list of products in a single request.")
             .WithBadge("CreateProductListBadge");
         #endregion
 
-        #region Update Product Endpoint
-        endpoints.MapPut("/update/{productId}", async (int productId, [FromBody] UpdateProductDto dto, IMediator mediator) =>
+        // ======================== 🟡 UPDATE & RESTORE 🟡 =========================
+
+        #region Update Product
+        endpoints.MapPut("/update/{productId:int}", async (int productId, [FromBody] UpdateProductDto dto, IMediator mediator) =>
             {
                 var command = new UpdateProductCommand(productId, dto);
                 var response = await mediator.Send(command);
                 return response.ToResult();
             })
             .WithName("UpdateProduct")
-            .WithSummary("Update Single Product.")
-            .WithDescription("Update a single product.")
+            .WithSummary("Update an existing product.")
+            .WithDescription("Updates product details including name, price, brand, and category.")
             .WithBadge("UpdateProductBadge");
         #endregion
 
-        #region Restore Product Endpoint
-        endpoints.MapPut("/restore/{productId}", async (int productId, IMediator mediator) =>
+        #region Restore Product
+        endpoints.MapPut("/restore/{productId:int}", async (int productId, IMediator mediator) =>
             {
                 var response = await mediator.Send(new RestoreProductCommand(productId));
                 return response.ToResult();
@@ -72,78 +76,84 @@ public static class ProductsEndpoints
             .WithBadge("RestoreProductBadge");
         #endregion
 
-        #region Delete Product Endpoint
-        endpoints.MapDelete("/delete/{productId}", async (int productId, IMediator mediator) =>
+        // ======================== 🔴 DELETE 🔴 ==================================
+
+        #region Delete Product
+        endpoints.MapDelete("/delete/{productId:int}", async (int productId, IMediator mediator) =>
             {
                 var response = await mediator.Send(new DeleteProductCommand(productId));
                 return response.ToResult();
             })
             .WithName("DeleteProduct")
-            .WithSummary("Delete Single Product.")
-            .WithDescription("Delete a single product.")
+            .WithSummary("Delete a product by ID.")
+            .WithDescription("Soft deletes a single product by its unique identifier.")
             .WithBadge("DeleteProductBadge");
         #endregion
-        
-        
-        #region Get All Products Endpoint
+
+        // ======================== 🔍 QUERIES 🔍 ==================================
+
+        #region Get All Products
         endpoints.MapGet("/list", async (IMediator mediator) =>
             {
                 var response = await mediator.Send(new GetProductsQuery());
                 return response.ToResult();
             })
             .WithName("GetProducts")
-            .WithSummary("Get All Products.")
-            .WithDescription("Get All Products.")
-            .WithBadge("GetProductsBadge");
+            .WithSummary("Retrieve all products.")
+            .WithDescription("Returns all non-deleted products with their brand, category, and stock information.")
+            .WithBadge("GetProductsBadge")
+            .Produces<BaseResponse<IEnumerable<ProductDto>>>(StatusCodes.Status200OK)
+            .Produces<BaseResponse<string>>(StatusCodes.Status500InternalServerError);
         #endregion
 
-        #region Get Products By Id
-        endpoints.MapGet("/{productId}", async (int productId, IMediator mediator) =>
+        #region Get Product By ID
+        endpoints.MapGet("/{productId:int}", async (int productId, IMediator mediator) =>
             {
                 var response = await mediator.Send(new GetProductByIdQuery(productId));
                 return response.ToResult();
             })
             .WithName("GetProductById")
-            .WithSummary("Get product by ID.")
-            .WithDescription("Fetches product details with brand, category, and subcategory names.");
+            .WithSummary("Get a product by ID.")
+            .WithDescription("Fetches detailed information for a product including brand, category, and subcategory names.")
+            .WithBadge("GetProductByIdBadge");
         #endregion
-        
+
         #region Get Products By Price Range
-        endpoints.MapGet("/price-range", async (decimal min, decimal max, IMediator mediator) =>
+        endpoints.MapGet("/price-range", async ([FromQuery] decimal min, [FromQuery] decimal max, IMediator mediator) =>
             {
                 var response = await mediator.Send(new GetProductsByPriceRangeQuery(min, max));
                 return response.ToResult();
             })
             .WithName("GetProductsByPriceRange")
             .WithSummary("Get products filtered by price range.")
-            .WithDescription("Returns products whose prices fall between the given minimum and maximum values.")
+            .WithDescription("Returns all products whose prices fall within the specified minimum and maximum values.")
             .WithBadge("PriceRangeBadge");
         #endregion
-        
-        #region Search Product Endpoint
-        endpoints.MapGet("/search", async (string name, IMediator mediator) =>
+
+        #region Search Products By Name
+        endpoints.MapGet("/search", async ([FromQuery] string name, IMediator mediator) =>
             {
                 var response = await mediator.Send(new GetProductByNameQuery(name));
                 return response.ToResult();
             })
             .WithName("SearchProductByName")
             .WithSummary("Search products by name.")
-            .WithDescription("Search for products matching part or full name, case-insensitive.")
+            .WithDescription("Searches for products matching part or full name, case-insensitive.")
             .WithBadge("SearchProductBadge");
         #endregion
 
-        #region Products With Variants Endpoint
+        #region Get Products With Variants
+
         endpoints.MapGet("/with-variants", async (IMediator mediator) =>
             {
                 var response = await mediator.Send(new GetProductsWithVariantsQuery());
                 return response.ToResult();
             })
             .WithName("GetProductsWithVariants")
-            .WithSummary("Get all products with their variants")
-            .WithDescription("Returns all non-deleted products with their Brand, Category, SubCategory, and Variant details (using projection joins).")
-            .Produces<BaseResponse<IEnumerable<ProductWithVariantsDto>>>(StatusCodes.Status200OK)
-            .Produces<BaseResponse<string>>(StatusCodes.Status500InternalServerError);
-        #endregion
+            .WithSummary("Get all products with their variants.")
+            .WithDescription("Returns all non-deleted products with their brand, category, subcategory, and variant details (using projection joins).")
+            .WithBadge("GetProductsWithVariantsBadge");
 
+        #endregion
     }
 }
