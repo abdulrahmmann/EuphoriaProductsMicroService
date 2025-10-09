@@ -7,6 +7,7 @@ using ProductsMicroService.Application.BrandFeature.Validators;
 using ProductsMicroService.Application.CategoriesFeature.Validators;
 using ProductsMicroService.Application.ColorsFeature.Validators;
 using ProductsMicroService.Application.ProductsFeature.Validators;
+using ProductsMicroService.Application.ProductVariantFeature.Validators;
 
 namespace ProductsMicroService.Application;
 
@@ -33,6 +34,9 @@ public static class ModuleDependencyInjection
         
         services.AddValidatorsFromAssemblyContaining<CreateProductValidator>();
         services.AddValidatorsFromAssemblyContaining<UpdateProductValidator>();
+        
+        services.AddValidatorsFromAssemblyContaining<CreateProductVariantValidator>();
+        services.AddValidatorsFromAssemblyContaining<UpdateProductVariantValidator>();
         
         return services;
     }

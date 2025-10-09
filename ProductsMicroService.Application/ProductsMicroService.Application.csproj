@@ -21,5 +21,10 @@
       <ProjectReference Include="..\ProductsMicroService.Domain\ProductsMicroService.Domain.csproj" />
       <ProjectReference Include="..\ProductsMicroService.Infrastructure\ProductsMicroService.Infrastructure.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ProductVariantFeature\Commands\" />
+      <Folder Include="ProductVariantFeature\Queries\" />
+    </ItemGroup>
     
 </Project>
