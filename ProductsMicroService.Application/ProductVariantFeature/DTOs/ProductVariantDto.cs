@@ -7,6 +7,11 @@ public record ProductVariantDto(
 
     int ProductId, 
     string ProductName, 
+    string ProductDescription, 
+    int TotalStock, 
+    int CategoryId, 
+    int SubCategoryId, 
+    int BrandId, 
 
     int ColorId, 
     string ColorName, 

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProductsMicroService.Application.Bases;
 using ProductsMicroService.Application.ProductsFeature.Commands.CreateProduct;
 using ProductsMicroService.Application.ProductsFeature.Commands.CreateProductList;
 using ProductsMicroService.Application.ProductsFeature.Commands.DeleteProduct;
@@ -9,6 +10,7 @@ using ProductsMicroService.Application.ProductsFeature.DTOs;
 using ProductsMicroService.Application.ProductsFeature.Queries.GetProductById;
 using ProductsMicroService.Application.ProductsFeature.Queries.GetProducts;
 using ProductsMicroService.Application.ProductsFeature.Queries.GetProductsByPriceRange;
+using ProductsMicroService.Application.ProductsFeature.Queries.GetProductsWithVariant;
 using ProductsMicroService.Application.ProductsFeature.Queries.SearchProductByName;
 using ProductsMicroService.Helpers;
 using Scalar.AspNetCore;
@@ -83,11 +85,10 @@ public static class ProductsEndpoints
         #endregion
         
         
-        
         #region Get All Products Endpoint
-        endpoints.MapGet("/list", async ([AsParameters] GetProductsQuery query, IMediator mediator) =>
+        endpoints.MapGet("/list", async (IMediator mediator) =>
             {
-                var response = await mediator.Send(query);
+                var response = await mediator.Send(new GetProductsQuery());
                 return response.ToResult();
             })
             .WithName("GetProducts")
@@ -131,6 +132,18 @@ public static class ProductsEndpoints
             .WithBadge("SearchProductBadge");
         #endregion
 
+        #region Products With Variants Endpoint
+        endpoints.MapGet("/with-variants", async (IMediator mediator) =>
+            {
+                var response = await mediator.Send(new GetProductsWithVariantsQuery());
+                return response.ToResult();
+            })
+            .WithName("GetProductsWithVariants")
+            .WithSummary("Get all products with their variants")
+            .WithDescription("Returns all non-deleted products with their Brand, Category, SubCategory, and Variant details (using projection joins).")
+            .Produces<BaseResponse<IEnumerable<ProductWithVariantsDto>>>(StatusCodes.Status200OK)
+            .Produces<BaseResponse<string>>(StatusCodes.Status500InternalServerError);
+        #endregion
 
     }
 }
