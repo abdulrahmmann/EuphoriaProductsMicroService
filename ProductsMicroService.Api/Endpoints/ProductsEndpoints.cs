@@ -23,7 +23,7 @@ public static class ProductsEndpoints
     {
         var endpoints = builder.MapGroup("/api/products").WithTags("Products").WithOpenApi();
         
-        // ======================== 🟢 CREATE 🟢 ========================
+        // ======================== 🟢 CREATE 🟢 ======================
 
         #region Create Single Product
         endpoints.MapPost("/create", async ([FromBody] CreateProductCommand command, IMediator mediator) =>
@@ -49,7 +49,7 @@ public static class ProductsEndpoints
             .WithBadge("CreateProductListBadge");
         #endregion
 
-        // ======================== 🟡 UPDATE & RESTORE 🟡 =========================
+        // ====================== 🟡 UPDATE & RESTORE 🟡 ===============
 
         #region Update Product
         endpoints.MapPut("/update/{productId:int}", async (int productId, [FromBody] UpdateProductDto dto, IMediator mediator) =>
@@ -76,7 +76,7 @@ public static class ProductsEndpoints
             .WithBadge("RestoreProductBadge");
         #endregion
 
-        // ======================== 🔴 DELETE 🔴 ==================================
+        // ======================== 🔴 DELETE 🔴 ========================
 
         #region Delete Product
         endpoints.MapDelete("/delete/{productId:int}", async (int productId, IMediator mediator) =>
@@ -90,7 +90,7 @@ public static class ProductsEndpoints
             .WithBadge("DeleteProductBadge");
         #endregion
 
-        // ======================== 🔍 QUERIES 🔍 ==================================
+        // ======================== 🔍 QUERIES 🔍 ========================
 
         #region Get All Products
         endpoints.MapGet("/list", async (IMediator mediator) =>
