@@ -64,7 +64,7 @@ public class CreateCategoryListCommandHandler: ICommandHandler<CreateCategoryLis
             }
 
             // Map + create entities
-            var newCategories = request.Categories.Select(dto => Category.CreateCategory(dto.Name, dto.Description)).ToList();
+            var newCategories = request.Categories.Select(dto => Category.Create(dto.Name, dto.Description)).ToList();
 
             await _dbContext.Categories.AddRangeAsync(newCategories, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);

@@ -36,7 +36,7 @@ public class DeleteProductVariantCommandHandler: ICommandHandler<DeleteProductVa
                 return BaseResponse<Unit>.NotFound($"Product Variant by id: {request.VariantId} not found");
             }
             
-            variant.SoftDeleteProductVariant();
+            variant.SoftDelete();
 
             await _dbContext.SaveChangesAsync(cancellationToken);
             

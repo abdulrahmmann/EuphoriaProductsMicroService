@@ -66,13 +66,13 @@ public class ProductVariant : Entity<int>
 
     #region Soft Delete ProductVariant
     /// <summary> Method to softly delete ProductVariant. </summary>
-    public void SoftDeleteProductVariant(string? deletedBy = null)
+    public void SoftDelete(string? deletedBy = null)
         => MarkDeleted(deletedBy);
     #endregion
 
     #region Restore Deleted ProductVariant
     /// <summary> Method to restore softly deleted ProductVariant. </summary>
-    public void RestoreDeletedProductVariant(string? restoredBy = null)
+    public void Restore(string? restoredBy = null)
         => MarkRestored(restoredBy);
     #endregion
 }

@@ -35,7 +35,7 @@ public class Wishlist : Entity<int>
 
     #region Update Wishlist
     /// <summary> Method to update Wishlist item. </summary>
-    public void UpdateWishlist(int userId, int productId, string? modifiedBy = null)
+    public void Update(int userId, int productId, string? modifiedBy = null)
     {
         if (userId <= 0)
             throw new ArgumentOutOfRangeException(nameof(userId), "UserId must be a positive integer.");
@@ -52,13 +52,13 @@ public class Wishlist : Entity<int>
 
     #region Soft Delete Wishlist
     /// <summary> Method to softly delete Wishlist item. </summary>
-    public void SoftDeleteWishlist(string? deletedBy = null)
+    public void SoftDelete(string? deletedBy = null)
         => MarkDeleted(deletedBy);
     #endregion
 
     #region Restore Deleted Wishlist
     /// <summary> Method to restore softly deleted Wishlist item. </summary>
-    public void RestoreDeletedWishlist(string? restoredBy = null)
+    public void Restore(string? restoredBy = null)
         => MarkRestored(restoredBy);
     #endregion
 }

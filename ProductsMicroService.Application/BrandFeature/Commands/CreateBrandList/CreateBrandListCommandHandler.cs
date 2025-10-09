@@ -64,7 +64,7 @@ public class CreateBrandListCommandHandler: ICommandHandler<CreateBrandListComma
 
             // Map + create entities
             var newBrands = request.Brands
-                .Select(dto => Brand.CreateBrand(dto.Name))
+                .Select(dto => Brand.Create(dto.Name))
                 .ToList();
 
             await _dbContext.Brands.AddRangeAsync(newBrands, cancellationToken);

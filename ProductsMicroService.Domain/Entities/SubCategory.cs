@@ -50,13 +50,13 @@ public class SubCategory : Entity<int>
 
     #region Soft Delete SubCategory
     /// <summary> Method to softly delete SubCategory. </summary>
-    public void SoftDeleteSubCategory(string? deletedBy = null)
+    public void SoftDelete(string? deletedBy = null)
         => MarkDeleted(deletedBy);
     #endregion
 
     #region Restore Deleted SubCategory
     /// <summary> Method to restore softly deleted SubCategory. </summary>
-    public void RestoreDeletedSubCategory(string? restoredBy = null)
+    public void Restore(string? restoredBy = null)
         => MarkRestored(restoredBy);
     #endregion
 }

@@ -27,13 +27,13 @@ public class Category: Entity<int>
     
     #region Create Category
     /// <summary> Factory method to create Category. </summary>
-    public static Category CreateCategory(string name, string? description) 
+    public static Category Create(string name, string? description) 
         => new(name, description);
     #endregion
     
     #region Update Category
     /// <summary> method to update Category. </summary>
-    public void UpdateCategory(string name, string? description, string? modifiedBy = null)
+    public void Update(string name, string? description, string? modifiedBy = null)
     {
         if (!string.IsNullOrEmpty(name)) Name = name;
         if (!string.IsNullOrEmpty(description)) Description = description;
@@ -44,11 +44,11 @@ public class Category: Entity<int>
     
     #region Soft Delete Category
     /// <summary> method to softly delete Category. </summary>
-    public void SoftDeleteCategory(string? deletedBy = null) => MarkDeleted(deletedBy);
+    public void SoftDelete(string? deletedBy = null) => MarkDeleted(deletedBy);
     #endregion
     
     #region Restore Deleted Category
     /// <summary> method to restore softly deleted Category. </summary>
-    public void RestoreDeletedCategory(string? restoredBy = null) => MarkRestored(restoredBy);
+    public void Restor(string? restoredBy = null) => MarkRestored(restoredBy);
     #endregion
 }

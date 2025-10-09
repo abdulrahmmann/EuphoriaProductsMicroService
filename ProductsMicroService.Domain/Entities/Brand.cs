@@ -20,12 +20,12 @@ public class Brand : Entity<int>
 
     #region Create Brand
     /// <summary> Factory method to create Brand. </summary>
-    public static Brand CreateBrand(string name) => new(name);
+    public static Brand Create(string name) => new(name);
     #endregion
 
     #region Update Brand 
     /// <summary> method to update Brand. </summary>
-    public void UpdateBrand(string name, string? modifiedBy = null)
+    public void Update(string name, string? modifiedBy = null)
     {
         if (!string.IsNullOrEmpty(name))
         {
@@ -38,11 +38,11 @@ public class Brand : Entity<int>
 
     #region Soft Delete Brand
     /// <summary> method to softly delete Brand. </summary>
-    public void SoftDeleteBrand(string? deletedBy = null) => MarkDeleted(deletedBy);
+    public void SoftDelete(string? deletedBy = null) => MarkDeleted(deletedBy);
     #endregion
     
     #region Restore Deleted Brand
     /// <summary> method to restore softly deleted Brand. </summary>
-    public void RestoreDeletedBrand(string? restoredBy = null) => MarkRestored(restoredBy);
+    public void Restore(string? restoredBy = null) => MarkRestored(restoredBy);
     #endregion    
 }

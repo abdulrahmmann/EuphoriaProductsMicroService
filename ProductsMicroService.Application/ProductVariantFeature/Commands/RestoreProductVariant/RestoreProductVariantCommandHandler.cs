@@ -34,7 +34,7 @@ public class RestoreProductVariantCommandHandler: ICommandHandler<RestoreProduct
             if (product == null)
                 return BaseResponse<Unit>.NotFound($"Product Variant with id {request.VariantId} not found.");
 
-            product.RestoreDeletedProductVariant();
+            product.Restore();
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 

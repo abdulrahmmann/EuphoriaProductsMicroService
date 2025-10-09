@@ -24,13 +24,13 @@ public class Size : Entity<int>
 
     #region Create Size
     /// <summary> Factory method to create Size. </summary>
-    public static Size CreateSize(string name)
+    public static Size Create(string name)
         => new(name);
     #endregion
 
     #region Update Size
     /// <summary> Method to update Size. </summary>
-    public void UpdateSize(string name, string? modifiedBy = null)
+    public void Update(string name, string? modifiedBy = null)
     {
         if (!string.IsNullOrEmpty(name))
             Name = name;
@@ -41,13 +41,13 @@ public class Size : Entity<int>
 
     #region Soft Delete Size
     /// <summary> Method to softly delete Size. </summary>
-    public void SoftDeleteSize(string? deletedBy = null)
+    public void SoftDelete(string? deletedBy = null)
         => MarkDeleted(deletedBy);
     #endregion
 
     #region Restore Deleted Size
     /// <summary> Method to restore softly deleted Size. </summary>
-    public void RestoreDeletedSize(string? restoredBy = null)
+    public void Restore(string? restoredBy = null)
         => MarkRestored(restoredBy);
     #endregion
 }

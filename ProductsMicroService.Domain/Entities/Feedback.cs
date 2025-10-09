@@ -31,13 +31,13 @@ public class Feedback : Entity<int>
     
     #region Factory Method
     /// <summary> Factory method to create a new Feedback. </summary>
-    public static Feedback CreateFeedback(int rating, string comment, int productId)
+    public static Feedback Create(int rating, string comment, int productId)
         => new(rating, comment, productId);
     #endregion
 
     #region Update
     /// <summary> Updates an existing feedback. </summary>
-    public void UpdateFeedback(int rating, string comment, string? modifiedBy = null)
+    public void Update(int rating, string comment, string? modifiedBy = null)
     {
         if (rating < 1 || rating > 5)
             throw new ArgumentOutOfRangeException(nameof(rating), "Rating must be between 1 and 5.");
@@ -53,11 +53,11 @@ public class Feedback : Entity<int>
 
     #region Soft Delete
     /// <summary> Soft deletes the feedback. </summary>
-    public void SoftDeleteFeedback(string? deletedBy = null) => MarkDeleted(deletedBy);
+    public void SoftDelete(string? deletedBy = null) => MarkDeleted(deletedBy);
     #endregion
 
     #region Restore
     /// <summary> Restores a previously soft-deleted feedback. </summary>
-    public void RestoreDeletedFeedback(string? restoredBy = null) => MarkRestored(restoredBy);
+    public void Restore(string? restoredBy = null) => MarkRestored(restoredBy);
     #endregion
 }

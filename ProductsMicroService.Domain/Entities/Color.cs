@@ -27,13 +27,13 @@ public class Color : Entity<int>
 
     #region Factory Method
     /// <summary> Factory method to create a new color. </summary>
-    public static Color CreateColor(string name, string hexCode)
+    public static Color Create(string name, string hexCode)
         => new(name, hexCode);
     #endregion
 
     #region Update
     /// <summary> Updates the color information. </summary>
-    public void UpdateColor(string name, string hexCode, string? modifiedBy = null)
+    public void Update(string name, string hexCode, string? modifiedBy = null)
     {
         if (!string.IsNullOrEmpty(name))
             Name = name;
@@ -47,12 +47,12 @@ public class Color : Entity<int>
 
     #region Soft Delete
     /// <summary> Soft deletes this color. </summary>
-    public void SoftDeleteColor(string? deletedBy = null) => MarkDeleted(deletedBy);
+    public void SoftDelete(string? deletedBy = null) => MarkDeleted(deletedBy);
     #endregion
 
     #region Restore
     /// <summary> Restores a soft-deleted color. </summary>
-    public void RestoreDeletedColor(string? restoredBy = null) => MarkRestored(restoredBy);
+    public void Restore(string? restoredBy = null) => MarkRestored(restoredBy);
     #endregion
 }
 

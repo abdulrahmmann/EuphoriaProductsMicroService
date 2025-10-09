@@ -63,7 +63,7 @@ public class CreateColorListCommandHandler: ICommandHandler<CreateColorListComma
 
             // Map + create entities
             var newColor = request.Colors
-                .Select(dto => Color.CreateColor(dto.Name, dto.HexCode))
+                .Select(dto => Color.Create(dto.Name, dto.HexCode))
                 .ToList();
 
             await _dbContext.Colors.AddRangeAsync(newColor, cancellationToken);

@@ -50,7 +50,7 @@ public class CreateBrandCommandHandler: IQueryHandler<CreateBrandCommand, BaseRe
             }
             
             // 3. Create Brand.
-            var newBrand = Brand.CreateBrand(request.BrandDto.Name);
+            var newBrand = Brand.Create(request.BrandDto.Name);
             
             // 4. Map Brand.
             var brandMapped = _mapper.Map<CreateBrandDto>(newBrand);

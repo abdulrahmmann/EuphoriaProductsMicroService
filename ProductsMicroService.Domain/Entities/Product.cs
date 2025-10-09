@@ -42,9 +42,14 @@ public class Product : Entity<int>
         MarkCreated();
     }
 
+    #region Create
+    /// <summary> Factory method to create a new Product. </summary>
     public static Product Create(string name, string description, decimal price, int totalStock, ICollection<string> productImages, int categoryId, int subCategoryId, int brandId)
         => new(name, description, price, totalStock, productImages, categoryId, subCategoryId, brandId);
+    #endregion
 
+    #region Update
+    /// <summary> Updates an existing Product. </summary>
     public void UpdateProduct(string? name, string? description, decimal? price, int? totalStock, int? categoryId, int? brandId, string? modifiedBy = null)
     {
         if (!string.IsNullOrEmpty(name)) Name = name;
@@ -56,8 +61,15 @@ public class Product : Entity<int>
 
         MarkModified(modifiedBy);
     }
-
+    #endregion
+    
+    #region Doft Delete
+    /// <summary> Soft deletes the Product. </summary>
     public void SoftDeleteProduct(string? deletedBy = null) => MarkDeleted(deletedBy);
+    #endregion
 
+    #region Restore
+    /// <summary> Restores a previously soft-deleted Product. </summary>
     public void RestoreDeletedProduct(string? restoredBy = null) => MarkRestored(restoredBy);
+    #endregion
 }
