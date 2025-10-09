@@ -49,13 +49,16 @@ public class ProductVariant : Entity<int>
 
     #region Update ProductVariant
     /// <summary> Method to update ProductVariant. </summary>
-    public void Update(int stock, decimal? priceOverride, string? modifiedBy = null)
+    public void Update(int stock, decimal? priceOverride, int productId, int colorId, int sizeId, string? modifiedBy = null)
     {
         if (stock < 0)
             throw new ArgumentOutOfRangeException(nameof(stock), "Stock cannot be negative.");
 
         Stock = stock;
         PriceOverride = priceOverride ?? PriceOverride;
+        ProductId = productId;
+        ColorId = colorId;
+        SizeId = sizeId;    
 
         MarkModified(modifiedBy);
     }

@@ -23,7 +23,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="ProductVariantFeature\Commands\" />
       <Folder Include="ProductVariantFeature\Queries\" />
     </ItemGroup>
     

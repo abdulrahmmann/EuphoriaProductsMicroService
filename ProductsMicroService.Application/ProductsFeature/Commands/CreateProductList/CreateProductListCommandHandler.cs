@@ -10,14 +10,14 @@ using ProductsMicroService.Infrastructure.Context;
 
 namespace ProductsMicroService.Application.ProductsFeature.Commands.CreateProductList;
 
-public class CreateProductListHandler: ICommandHandler<CreateProductListCommand, BaseResponse<Unit>>
+public class CreateProductListCommandHandler: ICommandHandler<CreateProductListCommand, BaseResponse<Unit>>
 {
     #region Create and Inject Instances.
     private readonly ApplicationDbContext  _dbContext;
     private readonly IValidator<CreateProductDto>  _validator;
     private readonly IMapper _mapper;
     
-    public CreateProductListHandler(ApplicationDbContext dbContext, IMapper mapper, IValidator<CreateProductDto>  validator)
+    public CreateProductListCommandHandler(ApplicationDbContext dbContext, IMapper mapper, IValidator<CreateProductDto>  validator)
     {
         _dbContext = dbContext;
         _mapper = mapper;
