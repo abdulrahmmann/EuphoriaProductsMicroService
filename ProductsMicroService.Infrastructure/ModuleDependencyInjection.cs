@@ -12,12 +12,19 @@ public static class ModuleDependencyInjection
         // Register Db Context
         var connectionStringTemplate = configuration.GetConnectionString("MySqlConnection")!;
 
+        // Read environment variables with fallback values
+        var host = Environment.GetEnvironmentVariable("MYSQL_HOST") ?? "localhost";
+        var port = Environment.GetEnvironmentVariable("MYSQL_PORT") ?? "3306";
+        var databaseName = Environment.GetEnvironmentVariable("MYSQL_DATABASE") ?? "EuphoriaProducts";
+        var userName = Environment.GetEnvironmentVariable("MYSQL_USER") ?? "root";
+        var password = Environment.GetEnvironmentVariable("MYSQL_PASSWORD") ?? "Admin1234";
+        
         var connectionString = connectionStringTemplate
-            .Replace("$MYSQL_HOST", Environment.GetEnvironmentVariable("MYSQL_HOST") ?? "localhost")
-            .Replace("$MYSQL_PORT", Environment.GetEnvironmentVariable("MYSQL_PORT") ?? "3306")
-            .Replace("$MYSQL_DATABASE", Environment.GetEnvironmentVariable("MYSQL_DATABASE") ?? "EuphoriaProducts")
-            .Replace("$MYSQL_USER", Environment.GetEnvironmentVariable("MYSQL_USER") ?? "root")
-            .Replace("$MYSQL_PASSWORD", Environment.GetEnvironmentVariable("MYSQL_PASSWORD") ?? "Admin1234");
+            .Replace("$MYSQL_HOST", host)
+            .Replace("$MYSQL_PORT", port)
+            .Replace("$MYSQL_DATABASE", databaseName)
+            .Replace("$MYSQL_USER", userName)
+            .Replace("$MYSQL_PASSWORD", password);
 
         services.AddDbContext<ApplicationDbContext>(options =>
         {
